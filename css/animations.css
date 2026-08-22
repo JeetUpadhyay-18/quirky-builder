@@ -1,0 +1,203 @@
+/* ==========================================================================
+   ANIMATIONS.CSS
+   1) The reading-progress bar + the "skim tracker" readout (top right) —
+      given real visual weight per the brief, so it reads as a feature,
+      not a footnote.
+   2) The scroll-swing rocket figurine that travels the length of the page.
+   ========================================================================== */
+
+/* ---- Reading progress bar ---- */
+#scroll-progress-wrap {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  height: 5px;
+  background: rgba(0,0,0,0.06);
+  z-index: 200;
+}
+#scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: repeating-linear-gradient(90deg, var(--ink-red), var(--ink-red) 8px, var(--ink-blue) 8px, var(--ink-blue) 16px);
+  transition: width 0.08s linear;
+}
+
+/* ---- Skim tracker: the top-right "how far in are you" readout ----
+   Given more visual weight: bigger footprint, a ring indicator, a
+   headline percentage instead of a single small text line. */
+#skim-tracker {
+  position: fixed;
+  top: 30px;
+  right: 14px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1.5px solid var(--ink-black);
+  box-shadow: 3px 3px 0 var(--ink-black);
+  border-radius: 999px;
+  padding: 8px 16px 8px 8px;
+  transition: transform var(--dur-med) var(--ease-smooth), opacity var(--dur-med) ease;
+}
+/* #skim-tracker.nav-hidden-sync {
+  transform: translateY(-90px);
+  opacity: 0;
+} */
+#skim-ring {
+  flex: 0 0 auto;
+  transform: rotate(-90deg);
+}
+
+#skim-ring circle.track { stroke: var(--rule-line); }
+#skim-ring circle.fill {
+  stroke: var(--ink-green);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s linear;
+}
+#skim-pct {
+  font-family: 'Inter', monospace;
+  font-weight: bold;
+  font-size: 1.rem;
+}
+#skim-label {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink-red);
+  max-width: 130px;
+  line-height: 1.1;
+}
+@media (max-width: 680px) {
+  #skim-label { display: none; }
+  #skim-tracker { padding: 6px; }
+}
+@media (max-width: 420px) {
+  #skim-tracker { top: 10px; right: 10px; }
+}
+
+/* <================= Scroll-swing rocket figurine ====================> */
+#scroll-string-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+#string-svg path {
+  fill: none;
+  stroke: var(--ink-blue);
+  stroke-width: 1.4;
+  stroke-dasharray: 2 7;
+  stroke-linecap: round;
+  opacity: 0.32;
+}
+#string-figure {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100px;
+  height: 100px;
+  transform-origin: center center;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.rocket-visual {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.22s var(--ease-snap);
+  filter: drop-shadow(2px 4px 0 rgba(18,18,18,0.10));
+}
+#string-figure:hover .rocket-visual {
+  transform: scale(1.14) rotate(-3deg);
+  filter: drop-shadow(3px 6px 6px rgba(12,74,172,0.25));
+}
+#string-figure:active .rocket-visual { transform: scale(0.94) rotate(2deg); }
+#string-figure.launching .rocket-visual { animation: rocketLaunchPulse 0.45s ease; }
+@keyframes rocketLaunchPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(1.4) rotate(10deg); filter: drop-shadow(0 0 10px rgba(197,31,31,0.45)); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.fig-body-fill { fill: #fffef9; stroke: var(--ink-black); stroke-width: 2.5; }
+.fig-line { fill: #f4f1ea; stroke: var(--ink-black); stroke-width: 2.5; }
+#string-figure:hover .fig-body-fill { fill: #fff4d6; }
+.flame {
+  transform-origin: 50px 77px;
+  animation: flameFlicker 0.4s ease-in-out infinite;
+}
+.flame-inner { animation-duration: 0.28s; }
+@keyframes flameFlicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  50% { transform: scaleY(0.82) scaleX(0.92); opacity: 0.82; }
+}
+
+/* UPDATE IN css/animations.css */
+
+/* Speech Bubble Base Container */
+#figure-speech {
+  position: absolute;
+  bottom: 105px; /* Default offset when rocket points UP */
+  left: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--ink-black, #17171a);
+  box-shadow: 2.5px 2.5px 0 var(--ink-black, #17171a);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink-red, #e2564f);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease, bottom 0.2s ease;
+  pointer-events: none;
+  z-index: 10;
+  transform-origin: center center;
+}
+
+#figure-speech.show {
+  opacity: 1;
+}
+
+/* Default Arrow Tail (Pointing DOWN to rocket nose) */
+#figure-speech::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-right: 1.5px solid var(--ink-black, #17171a);
+  border-bottom: 1.5px solid var(--ink-black, #17171a);
+}
+
+/* Dynamic State when Rocket is Descending (Nose Down) */
+#figure-speech.descending {
+  bottom: -50px; /* Position bubble cleanly below the inverted rocket */
+}
+
+/* Arrow Tail flips to point UP toward inverted rocket */
+#figure-speech.descending::after {
+  bottom: auto;
+  top: -5px;
+  border-right: none;
+  border-bottom: none;
+  border-left: 1.5px solid var(--ink-black, #17171a);
+  border-top: 1.5px solid var(--ink-black, #17171a);
+}
+
+@media (max-width: 640px) {
+  #string-figure { width: 70px; height: 70px; }
+}
+
+/* ---- Hero entrance sequence ---- */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-animate { animation: heroFadeUp 0.7s var(--ease-smooth) both; }
+.hero-animate.delay-1 { animation-delay: 0.08s; }
+.hero-animate.delay-2 { animation-delay: 0.18s; }
+.hero-animate.delay-3 { animation-delay: 0.28s; }
+

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" role="img" aria-label="Sketch portrait placeholder of Jeet Upadhyay">
+  <rect x="4" y="4" width="232" height="252" fill="#fdf9f0" stroke="#121212" stroke-width="2"></rect>
+  <circle cx="120" cy="98" r="52" fill="#fff4d6" stroke="#121212" stroke-width="2.5"></circle>
+  <path d="M70,120 C70,170 60,178 50,214 L190,214 C180,178 170,170 170,120 Z" fill="#fff4d6" stroke="#121212" stroke-width="2.5"></path>
+  <path d="M78,72 C82,50 100,40 120,40 C140,40 158,50 162,72 C164,84 160,92 158,96 C156,80 148,70 120,70 C92,70 84,80 82,96 C80,92 76,84 78,72 Z" fill="#121212"></path>
+  <circle cx="102" cy="100" r="3" fill="#121212"></circle>
+  <circle cx="138" cy="100" r="3" fill="#121212"></circle>
+  <path d="M104,118 Q120,128 136,118" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round"></path>
+  <path d="M70,150 Q120,138 170,150" fill="none" stroke="#121212" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.5"></path>
+  <text x="120" y="240" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="16" fill="#c51f1f" transform="rotate(-2 120 240)">that's me, roughly</text>
+</svg>

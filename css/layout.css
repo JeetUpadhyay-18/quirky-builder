@@ -1,0 +1,208 @@
+/* ==========================================================================
+   LAYOUT.CSS
+   Page shell: container, top navigation, section spacing/rhythm, grids.
+   ========================================================================== */
+
+.notebook-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+  position: relative;
+}
+
+/* Left notebook margin wire-binding illusion */
+@media (min-width: 768px) {
+  .notebook-container {
+    border-left: 2px solid var(--ink-red);
+    margin-left: 205px;
+    padding-right: 32px;
+  }
+}
+@media (min-width: 1080px) {
+  .notebook-container { padding-left: 76px; padding-right: 40px; }
+}
+
+/* --------------------------------------------------------------------------
+TOP NAVIGATION
+   Sticky bar that hides on scroll-down and reappears on scroll-up
+   (behavior driven by js/nav.js toggling the .nav-hidden class).
+   -------------------------------------------------------------------------- */
+   /* Update in css/layout.css */
+   .notebook-nav.nav-hidden {
+     transform: translateY(-100%);
+     box-shadow: none;
+   }
+   .notebook-nav.nav-scrolled {
+     box-shadow: 0 4px 14px rgba(18,18,18,0.06);
+   }
+   @media (min-width: 768px) {
+     .notebook-nav { padding-left: 64px; padding-right: 32px; }
+   }
+   @media (min-width: 1080px) {
+     .notebook-nav { padding-left: 10px; padding-right: 40px; }
+   }
+
+  /* ---- Notebook Blueprint Nav ---- */
+  .notebook-nav {
+    position: sticky;
+    top: 14px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 12px 6px 18px;
+    background: #ffffff;
+    border: 1.5px solid var(--ink-black);
+    box-shadow: 3px 3px 0px var(--ink-black);
+    border-radius: var(--radius-sm); /* Sharp/slightly rounded paper corners */
+    font-family: 'Space Mono', monospace;
+    max-width: fit-content;
+    margin: 0 auto;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Brand / Name styling */
+  .nav-brand {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+    color: var(--ink-black);
+    text-decoration: none;
+    padding-right: 12px;
+    margin-right: 8px;
+    border-right: 1px dashed var(--ink-black);
+    white-space: nowrap;
+  }
+
+  /* Nav Links Container */
+  #nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Individual Links */
+  .notebook-nav a:not(.nav-brand) {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: #444;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 0;
+    border-bottom: 2px solid transparent !important;
+    transition: all 0.15s ease;
+  }
+
+  /* Hover State */
+  .notebook-nav a:not(.nav-brand):hover {
+    color: var(--ink-blue);
+    border-bottom: 2px solid var(--ink-blue) !important;
+  }
+
+  /* Active Link State */
+  .notebook-nav a.nav-active {
+    color: var(--ink-red) !important;
+    font-weight: bold;
+    border-bottom: 2px solid var(--ink-red) !important;
+  }
+
+  /* Get In Touch Button Tag */
+  .notebook-nav a.highlight-marker {
+    background: var(--highlighter) !important;
+    color: var(--ink-black) !important;
+    font-weight: bold;
+    border: 1px solid var(--ink-black) !important;
+    padding: 4px 10px !important;
+    font-size: 0.72rem !important;
+    border-radius: 0 !important;
+    margin-left: 6px;
+    box-shadow: 1.5px 1.5px 0px var(--ink-black);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .notebook-nav a.highlight-marker:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 2.5px 2.5px 0px var(--ink-black);
+  }
+
+/* --------------------------------------------------------------------------
+   SECTION RHYTHM
+   Every section gets generous top/bottom air + a hairline divider so the
+   page reads as clearly separate "journal entries" rather than one block.
+   -------------------------------------------------------------------------- */
+.journal-section {
+  margin-bottom: 5rem;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+  position: relative;
+  scroll-margin-top: calc(var(--nav-height) + 24px);
+}
+.journal-section:first-of-type { padding-top: 0; }
+
+.journal-section + .journal-section {
+  border-top: 1px solid var(--rule-line);
+}
+
+@media (max-width: 640px) {
+  .journal-section { margin-bottom: var(--space-xl); padding-top: var(--space-lg); }
+}
+
+/* Small eyebrow label that precedes most section headers */
+.section-eyebrow {
+  color: var(--ink-blue);
+  font-size: var(--fs-eyebrow);
+  display: block;
+  margin-bottom: var(--space-xs);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.section-header {
+  font-size: var(--fs-h2);
+  font-weight: bold;
+  border-bottom: 3px dashed var(--ink-black);
+  padding-bottom: 10px;
+  margin-bottom: 36px;
+  display: inline-block;
+  letter-spacing: -0.02em;
+}
+
+.section-lede {
+  font-size: var(--fs-body);
+  max-width: 640px;
+  color: #333;
+  margin-bottom: var(--space-sm);
+  line-height: 1.65;
+}
+
+.annotation {
+  color: var(--ink-blue);
+  font-size: 0.85rem;
+  position: absolute;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  /* Decorative margin annotations compete with content on small screens */
+  .annotation { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   GRID / FLEX LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+.flex-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}

@@ -1,0 +1,67 @@
+/* ==========================================================================
+   VARIABLES.CSS
+   Design tokens for the "Engineer's Journal" aesthetic.
+   Change a value here and it ripples through the entire site —
+   this file is the single source of truth for color, spacing & type.
+   ========================================================================== */
+
+:root {
+  /* ---- Color: paper + ink, with two accent inks (blue = system, red = human) ---- */
+  --bg-paper:       #faf8f5;
+  --bg-paper-alt:   #f4f1ea;   /* slightly deeper paper, used for section banding */
+  --ink-black:      #121212;
+  --ink-blue:       #0c4aac;
+  --ink-red:        #c51f1f;
+  --ink-green:      #1f7a4d;
+  --highlighter:    #fef08a;
+  --highlighter-2:  #d9f2e6;  /* soft mint highlighter, used sparingly for variety */
+  --rule-line:      #e5e0d8;
+  --coffee:         #6f4e37;
+  --muted:          #5c5850;
+
+  /* ---- Spacing scale (used for consistent rhythm + the extra breathing room requested) ---- */
+  --space-3xs: 4px;
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  28px;
+  --space-lg:  48px;
+  --space-xl:  88px;   /* was 80px — widened for clearer section separation */
+  --space-2xl: 136px;  /* was 120px — widened for clearer section separation */
+
+  /* ---- Elevation ---- */
+  --shadow-soft: 0 2px 10px rgba(18,18,18,0.06);
+  --shadow-lift: 4px 8px 18px rgba(18,18,18,0.10);
+  --shadow-pop:  6px 10px 0 rgba(18,18,18,0.08);
+  --radius-sm: 3px;
+  --radius-md: 8px;
+
+  /* ---- Layout constants ---- */
+  --nav-height: 68px;
+  --container-max: 940px;
+
+  /* ---- Type scale (rem-based, fluid where it matters most) ---- */
+  --fs-eyebrow: 0.78rem;
+  --fs-body: 0.95rem;
+  --fs-small: 0.82rem;
+  --fs-micro: 0.7rem;
+  --fs-h1: clamp(2.1rem, 1.5rem + 2.2vw, 3.1rem);
+  --fs-h2: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+  --fs-h3: 1.1rem;
+  --fs-stat: clamp(2.1rem, 1.6rem + 2vw, 2.8rem);
+
+  /* ---- Motion ---- */
+  --ease-snap: cubic-bezier(.34,1.56,.64,1);
+  --ease-smooth: cubic-bezier(.22,.61,.36,1);
+  --dur-fast: 0.18s;
+  --dur-med: 0.32s;
+}
+
+/* Respect reduced-motion preference across the whole site */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

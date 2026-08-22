@@ -1,0 +1,260 @@
+/* ==========================================================================
+   EXPERIENCE: SYSTEM ARCHITECTURE MAP
+   ========================================================================== */
+
+.architecture-section {
+  padding: 20px 0 60px 0;
+}
+
+.section-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--muted, #74726c);
+  margin-top: -6px;
+}
+
+.architecture-container {
+  display: grid;
+  grid-template-columns: 1.2fr auto 0.8fr; /* Added center slot for connector arrow */
+  gap: 0;
+  align-items: center;
+  margin-top: 24px;
+}
+
+/* System Map Canvas */
+.system-map {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  background: #ffffff;
+  border: 2px solid var(--ink-black, #17171a);
+  border-radius: 16px;
+  box-shadow: 6px 8px 0px rgba(23, 23, 26, 0.12);
+  overflow: visible; /* Prevents button shadow and outlines from being cut off */
+}
+
+/* Interactive Map Hint Badge */
+.map-hint-pill {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.map-connections {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Nodes Positioning */
+.core-node {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fef08a;
+  border: 2px solid #17171a;
+  border-radius: 12px;
+  padding: 14px 20px;
+  text-align: center;
+  box-shadow: 4px 4px 0px #17171a;
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.core-node h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  margin: 4px 0 2px 0;
+}
+
+.node-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #17171a;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* Satellite Buttons */
+.satellite-node {
+  position: absolute;
+  background: #ffffff;
+  border: 2px solid #17171a;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #17171a;
+  box-shadow: 3px 3px 0px #17171a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 6;
+}
+
+.satellite-node:hover {
+  background: #17171a;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 4px 5px 0px #17171a;
+}
+
+/* Clean Active State (No messy double outline) */
+.satellite-node.active {
+  background: #17171a;
+  color: #ffffff;
+  transform: translateY(-2px);
+  border-color: #17171a;
+  box-shadow: 4px 5px 0px #e2564f;
+}
+
+/* Satellite Positions */
+.node-tech      { top: 50px;  left: 30px; }
+.node-ux        { top: 50px;  right: 30px; }
+.node-crm       { bottom: 100px; left: 25px; }
+.node-analytics { bottom: 100px; right: 25px; }
+.node-growth    { bottom: 25px; left: 50%; transform: translateX(-50%); }
+
+.node-growth:hover,
+.node-growth.active {
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* Connector Arrow Between the Map and Inspector */
+.panel-bridge-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  animation: nudgeRight 1.5s ease-in-out infinite;
+}
+
+@keyframes nudgeRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+/* Inspector Panel Card */
+.inspector-panel {
+  width: 100%;
+}
+
+.inspector-card {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid #17171a;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 6px 8px 0px rgba(23, 23, 26, 0.12);
+  animation: fadeInInspect 0.25s ease;
+}
+
+@keyframes fadeInInspect {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.inspector-header {
+  border-bottom: 2px dashed #e2e8f0;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.badge-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #e2564f;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.inspector-header h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.15rem;
+  margin: 8px 0 0 0;
+}
+
+.inspector-list {
+  margin: 0 0 18px 0;
+  padding-left: 18px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.inspector-list li {
+  margin-bottom: 8px;
+}
+
+.hl-yellow {
+  background: #fef08a;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+.capability-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.capability-pills span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  background: #f1f5f9;
+  border: 1px solid #17171a;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+/* Responsive Grid */
+@media (max-width: 980px) {
+  .architecture-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .panel-bridge-arrow {
+    transform: rotate(90deg);
+    padding: 10px 0;
+  }
+}
+
+/* Previous Chapter Section */
+.previous-chapter-card {
+  margin-top: 28px;
+  background: #fafaf9;
+  border: 2px dashed #1e293b;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 4px 6px 0px rgba(30, 41, 59, 0.1);
+}
+
+.previous-header {
+  border-bottom: 2px dashed #e2e8f0;
+  padding-bottom: 10px;
+}
