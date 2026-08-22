@@ -1,8 +1,3 @@
-# Jeet Upadhyay — Portfolio
-
-A static, dependency-free portfolio site. No build step — open `index.html`
-directly, or serve the folder with any static server.
-
 ## File map
 
 ```
