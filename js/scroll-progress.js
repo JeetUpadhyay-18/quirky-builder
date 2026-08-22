@@ -18,11 +18,11 @@
 
   const messages = [
     [0, 'Hey there'],
-    [15, "okay, you're reading now"],
+    [15, "you're reading now"],
     [35, 'committed. respect.'],
-    [55, 'this is basically a relationship now'],
-    [75, "almost there, don't ghost me"],
-    [95, 'you actually made it. hi.']
+    [55, 'its a relationship!'],
+    [75, "almost there!"],
+    [95, 'you actually made it']
   ];
 
   function update() {
