@@ -881,6 +881,26 @@
   line-height: 1.3;
 }
 
+#scroll-string-layer {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  overflow: hidden; /* Stops SVG path tails from triggering extra vertical scroll */
+  pointer-events: none;
+  z-index: 5;
+}
+
+.site-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 24px;
+  border-top: 1px dashed var(--ink-black);
+  font-size: 0.75rem;
+  position: relative;
+  z-index: 10;
+}
+
 /* ==========================================================================
    EXPERIENCE 
    ========================================================================== */

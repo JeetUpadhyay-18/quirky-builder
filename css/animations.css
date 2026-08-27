@@ -94,8 +94,8 @@
 #string-figure {
   position: absolute;
   top: 0; left: 0;
-  width: 100px;
-  height: 100px;
+  width: 78px;
+  height: 78px;
   transform-origin: center center;
   pointer-events: auto;
   cursor: pointer;
@@ -103,11 +103,12 @@
 .rocket-visual {
   width: 100%;
   height: 100%;
+  transform: translateY(28px); /* Shifts rocket down */
   transition: transform 0.22s var(--ease-snap);
   filter: drop-shadow(2px 4px 0 rgba(18,18,18,0.10));
 }
 #string-figure:hover .rocket-visual {
-  transform: scale(1.14) rotate(-3deg);
+  transform: translateY(28px) scale(1.14) rotate(-3deg);
   filter: drop-shadow(3px 6px 6px rgba(12,74,172,0.25));
 }
 #string-figure:active .rocket-visual { transform: scale(0.94) rotate(2deg); }
@@ -152,6 +153,8 @@
   pointer-events: none;
   z-index: 10;
   transform-origin: center center;
+  bottom: 78px;
+  left: 50px;
 }
 
 #figure-speech.show {

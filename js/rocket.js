@@ -34,59 +34,69 @@
     'Somewhere, a sprint is being over-committed.'
   ];
 
-function buildPath() {
-  const docH = document.documentElement.scrollHeight;
-  const vw = window.innerWidth;
-  layer.style.height = docH + 'px';
-  svg.setAttribute('height', docH);
-  svg.style.height = docH + 'px';
+  function buildPath() {
+    const footer = document.querySelector('.site-footer');
+    // Clamp the end boundary exactly to the footer's top offset
+    const footerTop = footer ? footer.offsetTop : (document.documentElement.scrollHeight - 100);
+    const vw = window.innerWidth;
 
-  const isNarrow = vw < 980;
+    // Constrain the SVG canvas height to avoid creating excess scroll overflow
+    layer.style.height = footerTop + 'px';
+    svg.setAttribute('height', footerTop);
+    svg.style.height = footerTop + 'px';
 
-  // 1. Explicit Safe Bounds
-  const leftX = isNarrow ? Math.max(20, vw * 0.08) : Math.max(300, vw * 0.28); 
-  const rightX = isNarrow ? (vw * 0.82) : Math.max(leftX + 100, Math.min(vw - 80, vw * 0.88));
+    const isNarrow = vw < 980;
 
-  // 2. Start Y position aligned with the photo on the right
-  const startY = isNarrow ? 220 : 280; 
+    // 1. Explicit Safe Bounds
+    const leftX = isNarrow ? Math.max(20, vw * 0.08) : Math.max(300, vw * 0.28); 
+    const rightX = isNarrow ? (vw * 0.82) : Math.max(leftX + 100, Math.min(vw - 80, vw * 0.88));
 
-  // 3. Start ON THE RIGHT side
-  let points = [{ x: rightX, y: startY }];
-  let y = startY;
-  let targetRight = false; // Next point should go LEFT
+    // 2. Start Y position aligned with the photo on the right
+    const startY = isNarrow ? 220 : 280; 
 
-  const segH = Math.max(420, Math.min(650, docH / 9));
+    // 3. Start ON THE RIGHT side
+    let points = [{ x: rightX, y: startY }];
+    let y = startY;
+    let targetRight = false; // Next point goes LEFT
 
-  while (y < docH - 120) {
-    y += segH;
-    points.push({ x: targetRight ? rightX : leftX, y: y });
-    targetRight = !targetRight;
+    const segH = Math.max(350, Math.min(520, (footerTop - startY) / 7));
+
+    // Stop adding zigzag segments before reaching the footer threshold
+    while (y + segH < footerTop - 60) {
+      y += segH;
+      points.push({ x: targetRight ? rightX : leftX, y: y });
+      targetRight = !targetRight;
+    }
+
+    // Explicit terminal anchor point positioned cleanly above the footer border
+    points.push({
+      x: targetRight ? rightX : leftX,
+      y: footerTop - 40
+    });
+
+    // Build SVG Path with smooth cubic Beziers
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 1; i < points.length; i++) {
+      const p0 = points[i - 1];
+      const p1 = points[i];
+      const midY = (p0.y + p1.y) / 2;
+      d += ` C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y}`;
+    }
+
+    pathEl.setAttribute('d', d);
+    totalLen = pathEl.getTotalLength();
+
+    // Reset starting position to the first point on the right
+    if (!started && totalLen > 0) {
+      const p0 = pathEl.getPointAtLength(0);
+      current.x = target.x = prevX = p0.x;
+      current.y = target.y = p0.y;
+    }
   }
-
-  // Build SVG Path
-  let d = `M ${points[0].x} ${points[0].y}`;
-  for (let i = 1; i < points.length; i++) {
-    const p0 = points[i - 1];
-    const p1 = points[i];
-    const midY = (p0.y + p1.y) / 2;
-    d += ` C ${p0.x} ${midY}, ${p1.x} ${midY}, ${p1.x} ${p1.y}`;
-  }
-
-  pathEl.setAttribute('d', d);
-  totalLen = pathEl.getTotalLength();
-
-  // Reset starting position to the first point on the right
-  if (!started && totalLen > 0) {
-    const p0 = pathEl.getPointAtLength(0);
-    current.x = target.x = prevX = p0.x;
-    current.y = target.y = p0.y;
-  }
-}
-
 
   function updateTarget() {
     if (!totalLen) return;
-    const scrollTop = window.scrollY;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     const progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
     const pt = pathEl.getPointAtLength(progress * totalLen);
@@ -102,8 +112,6 @@ function buildPath() {
     lastScrollY = scrollTop;
   }
 
-  // UPDATE THE loop() FUNCTION IN js/rocket.js
-
   function loop() {
     current.x += (target.x - current.x) * 0.09;
     current.y += (target.y - current.y) * 0.09;
@@ -116,14 +124,14 @@ function buildPath() {
     prevX = current.x;
     const tilt = Math.max(-16, Math.min(16, dx * 2.2));
 
-    // 1. Rotate the rocket figure container as normal
-    figure.style.transform = `translate(${current.x - 30}px, ${current.y - 96}px) rotate(${flipCurrent + tilt}deg)`;
+    // Centers the 72px x 72px rocket directly onto the path coordinates (offset by -36px)
+    figure.style.transform = `translate(${current.x - 36}px, ${current.y - 36}px) rotate(${flipCurrent + tilt}deg)`;
 
-    // 2. DYNAMIC FIX: Counter-rotate speech bubble so text stays right-side up!
+    // Counter-rotate speech bubble so text stays right-side up
     if (speech) {
       speech.style.transform = `translateX(-50%) rotate(${-flipCurrent - tilt}deg)`;
       
-      // Toggle flipped class when nose is pointing down (descending)
+      // Toggle descending class when nose is pointing down
       if (Math.abs(flipCurrent - 180) < 45) {
         speech.classList.add('descending');
       } else {
@@ -139,6 +147,7 @@ function buildPath() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => { buildPath(); updateTarget(); }, 150);
   });
+  
   window.addEventListener('scroll', updateTarget, { passive: true });
 
   if (speech) {
@@ -159,6 +168,9 @@ function buildPath() {
     updateTarget();
     started = true;
     loop();
-    setTimeout(buildPath, 600); // re-measure once fonts/images settle document height
+    setTimeout(() => {
+      buildPath();
+      updateTarget();
+    }, 600); // Re-measure once fonts, card stacks, and images settle layout
   });
 })();

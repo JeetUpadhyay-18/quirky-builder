@@ -180,7 +180,7 @@
                 </div>
                 <span class="stamp-mini">SCALE</span>
                 <div class="num">100K+</div>
-                <div class="lbl">Active Doctors</div>
+                <div class="lbl">Onboarded Doctors</div>
               </div>
 
               <div class="sticky-metric-note blue-note">
@@ -195,13 +195,13 @@
                 background: rgba(217, 242, 230, 0.85); border: 1px solid rgba(31, 122, 77, 0.2);"></div>
                 <span class="stamp-mini">UX</span>
                 <div class="num">50%</div>
-                <div class="lbl">Onboarding Slashed</div>
+                <div class="lbl">Onboarding time slashed</div>
               </div>
 
               <div class="sticky-metric-note yellow-note">
                 <div class="washi-tape" style="top:-10px; left:15px; transform: rotate(-4deg);
                 background: rgba(229, 224, 216, 0.85); border: 1px solid rgba(18, 18, 18, 0.1)"></div>
-                <span class="stamp-mini">API</span>
+                <span class="stamp-mini">CRM</span>
                 <div class="num">99%</div>
                 <div class="lbl">Latency Cut (24h &rarr; 2m)</div>
               </div>
@@ -536,117 +536,78 @@
       </section>
 
 
-<!-- ============================ EXPERIENCE: SYSTEM ARCHITECTURE MAP ============================ -->
-<section id="experience" class="architecture-section">
-  
-    <div class="section-header">
-      <span class="eyebrow" style="font-size: 15px; color: #e2564f;">// What I have done so far</span>
-      <h2 class="section-title" style="font-size: 35px;">Professional Experience</h2>
-      <p class="section-desc">Click any node to inspect technical specs, automations, and product deliverables.</p>
+<!-- ============================ EXPERIENCE: IDE FILE EXPLORER ============================ -->
+<section id="experience" class="ide-section">
+
+  <div class="section-header">
+    <span class="eyebrow" style="font-size: 15px; color: #e2564f;">// What I have done so far</span>
+    <h2 class="section-title" style="font-size: 35px;">Professional Experience</h2>
+    <p class="section-desc">Browse it like a codebase — every role I performed is a file, every deliverable is a comment.</p>
+  </div>
+
+  <div class="ide-window">
+
+    <div class="ide-titlebar">
+      <div class="ide-dots">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+      </div>
+      <div class="ide-path">~/career/experience.workspace</div>
     </div>
 
-    <div class="chapter-header-outer">
-        <span class="badge-tag-chapter" style="font-size: 15px;">CURRENT CHAPTER</span>
-        <h3 class="company-title-outer" style="font-size: 35px; color:blue">EPC Tech | Medgami</h3>
-    </div>
-      
-    <div class="architecture-container">
+    <div class="ide-body">
 
-        <div class="system-map">  
-          <!-- Interactive Click Hint Badge -->
-          <div class="map-hint-pill">Click a node to inspect deliverables ➔</div>
+      <nav class="ide-sidebar" aria-label="Experience file tree">
 
-          <!-- Central Orchestrator Node -->
-          <div class="core-node active-node" data-scope="core">
-            <span class="node-tag">ORCHESTRATOR</span>
-            <h3>Product Analyst</h3>
-          </div>
-
-          <!-- Internal SVG Lines -->
-          <svg class="map-connections" viewBox="0 0 500 360" preserveAspectRatio="none">
-            <path id="path-tech"      d="M 250 180 L 105 75"  stroke="#17171a" stroke-width="2" stroke-dasharray="4 4"/>
-            <path id="path-ux"        d="M 250 180 L 395 75"  stroke="#17171a" stroke-width="2" stroke-dasharray="4 4"/>
-            <path id="path-crm"       d="M 250 180 L 115 255" stroke="#17171a" stroke-width="2" stroke-dasharray="4 4"/>
-            <path id="path-analytics" d="M 250 180 L 385 255" stroke="#17171a" stroke-width="2" stroke-dasharray="4 4"/>
-            <path id="path-growth"    d="M 250 180 L 250 315" stroke="#17171a" stroke-width="2" stroke-dasharray="4 4"/>
-          </svg>
-
-          <!-- Scope Satellite Nodes -->
-          <button class="satellite-node node-tech" data-scope="tech">
-            <span class="node-icon">⚙️</span>
-            <span class="node-label">Tech &amp; Eng</span>
+        <div class="folder">
+          <button class="folder-header" data-folder-toggle="epc-tech" aria-expanded="true">
+            <span class="chevron">▾</span>
+            <span class="folder-name">epc-tech/</span>
           </button>
+          <span class="folder-subtitle">Medgami — current chapter</span>
 
-          <button class="satellite-node node-ux active" data-scope="ux">
-            <span class="node-icon">🎨</span>
-            <span class="node-label">UX &amp; Specs</span>
-          </button>
-
-          <button class="satellite-node node-crm" data-scope="crm">
-            <span class="node-icon">👥</span>
-            <span class="node-label">CRM &amp; Doctors</span>
-          </button>
-
-          <button class="satellite-node node-analytics" data-scope="analytics">
-            <span class="node-icon">📊</span>
-            <span class="node-label">Analytics</span>
-          </button>
-
-          <button class="satellite-node node-growth" data-scope="growth">
-            <span class="node-icon">📈</span>
-            <span class="node-label">Growth &amp; Scale</span>
-          </button>
-        </div>
-
-        <!-- NEW: Visible Bridge Line with Arrow connecting Left Box to Right Box -->
-        <div class="panel-bridge-arrow">
-          <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-            <line x1="0" y1="12" x2="30" y2="12" stroke="#e2564f" stroke-width="2.5" stroke-dasharray="4 3"/>
-            <polygon points="28,7 38,12 28,17" fill="#e2564f"/>
-          </svg>
-        </div>
-
-        <!-- RIGHT: Inspector Panel (Details Card) -->
-        <div class="inspector-panel" id="inspector-panel">
-          <div class="inspector-card">
-            <div class="inspector-header">
-              <span class="badge-tag">UX &amp; DESIGN</span>
-              <h3>Specs &amp; Wireframes</h3>
-            </div>
-            <ul class="inspector-list">
-              <li>Authored Figma API specs and interactive wireframe flows.</li>
-              <li>Managed design system component synchronization across mobile &amp; web.</li>
-            </ul>
-            <div class="capability-pills">
-              <span>Figma Specs</span>
-              <span>Wireframing</span>
-              <span>Design Systems</span>
-              <span>User Journeys</span>
-            </div>
+          <div class="file-list" data-folder-list="epc-tech">
+            <button class="file-row active" data-file="role"><span class="file-icon">JS</span>product.js</button>
+            <button class="file-row" data-file="tech"><span class="file-icon">JS</span>tech.js</button>
+            <button class="file-row" data-file="ux"><span class="file-icon">JS</span>ux.js</button>
+            <button class="file-row" data-file="crm"><span class="file-icon">JS</span>crm.js</button>
+            <button class="file-row" data-file="analytics"><span class="file-icon">JS</span>analytics.js</button>
+            <button class="file-row" data-file="growth"><span class="file-icon">JS</span>growth.js</button>
           </div>
         </div>
 
+        <div class="folder">
+          <button class="folder-header" data-folder-toggle="native-co" aria-expanded="false">
+            <span class="chevron">▸</span>
+            <span class="folder-name">native-co/</span>
+          </button>
+          <span class="folder-subtitle">Native Co. — previous chapter</span>
+
+          <div class="file-list collapsed" data-folder-list="native-co">
+            <button class="file-row" data-file="native"><span class="file-icon">JS</span>hr-tech.js</button>
+          </div>
+        </div>
+
+      </nav>
+
+      <div class="ide-editor">
+        <div class="editor-tabs">
+          <div class="editor-tab">
+            <span class="tab-icon">JS</span>
+            <span class="tab-name" id="tab-name">role.js</span>
+          </div>
+        </div>
+
+        <div class="editor-breadcrumb" id="editor-breadcrumb">epc-tech › role.js</div>
+
+        <div class="editor-body" id="editor-body"></div>
       </div>
 
-  <div class="previous-chapter-card" id="native-card">
-    <div class="previous-header">
-      <span class="badge-tag" style="background: #e2e8f0; color: #1e293b; border-color: #cbd5e1;">PREVIOUS CHAPTER</span>
-      <h3 style="font-family: 'Space Mono', monospace; margin: 6px 0 2px 0;">Native Co. — Building HR Tech</h3>
-      <span style="font-family: 'Caveat', cursive; font-size: 1.05rem; color: #e2564f;">where product management began</span>
-    </div>
-    <ul class="inspector-list" style="margin: 12px 0;">
-      <li>Closed <span class="hl-yellow">₹80L+</span> in enterprise sales.</li>
-      <li>Built an internal HRM product for team operations.</li>
-      <li>Shipped dashboards that smoothed operations.</li>
-    </ul>
-    <div class="capability-pills">
-      <span>Enterprise Sales</span>
-      <span>HRM Product</span>
-      <span>Operations Dashboards</span>
     </div>
   </div>
-</section>
 
+</section>
 
 <!-- ============================ CREDENTIALS: STICKY CARD DECK ============================ -->
       <section id="credentials" class="credentials-deck-section">
