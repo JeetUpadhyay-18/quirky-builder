@@ -749,7 +749,7 @@
 
   </div>
 
-      <!-- ============================ ASSISTANT WIDGET ============================ -->
+    <!-- ============================ ASSISTANT WIDGET ============================ -->
     <!-- Floating J.A.R.V.I.S. Arc Reactor Terminal -->
     <div id="interactive-chat-container">
       <button id="chat-system-trigger" aria-expanded="false" aria-controls="chat-viewport-panel" title="Initiate AI Assistant Protocol">
@@ -760,7 +760,7 @@
           <circle cx="50" cy="50" r="20" fill="none" stroke="#0ea5e9" stroke-width="3"/>
           <circle cx="50" cy="50" r="8" fill="#38bdf8"/>
         </svg>
-        <span>Jeet's AI</span>
+        <span>Support Bot</span>
       </button>
 
       <div id="chat-viewport-panel" class="hidden" role="dialog" aria-label="Site assistant chat">
@@ -772,17 +772,21 @@
             </svg>
           </div>
           <div class="chat-header-text">
-            <div class="chat-header-title">AI Terminal</div>
+            <div class="chat-header-title">Support Bot</div>
             <div class="chat-header-status">Online</div>
           </div>
+          <button id="chat-reset-btn" class="chat-reset-btn" type="button" title="Reset conversation" aria-label="Reset conversation">&#8635;</button>
         </div>
 
         <div id="chat-messages-stream"></div>
 
         <div id="suggested-chips-bar">
-          <button class="chip-action" data-query="What does Jeet currently do?">Current role</button>
-          <button class="chip-action" data-query="Tell me about a case study">Projects</button>
-          <button class="chip-action" data-query="What are the key metrics?">Metrics</button>
+          <button class="chip-action" data-query="What is your current role?">Current role</button>
+          <button class="chip-action" data-query="What are your core skills?">Skills</button>
+          <button class="chip-action" data-query="Tell me about your projects">Projects</button>
+          <button class="chip-action" data-query="What's your education?">Education</button>
+          <button class="chip-action" data-query="Show me the key metrics">Metrics</button>
+          <button class="chip-action" data-query="How can I contact you?">Contact</button>
         </div>
 
         <form id="assistant-input-form">
